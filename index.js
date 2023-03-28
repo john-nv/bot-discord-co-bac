@@ -48,5 +48,4 @@ client.on("messageCreate", async (msg) => {
 client.on('error', (error) => {
   console.error(error);
 });
-
 client.login(token);

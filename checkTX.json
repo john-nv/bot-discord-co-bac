@@ -1,6 +1,7 @@
+
 {
     "check": false,
-    "mot": null,
-    "hai": null,
-    "ba": null
+    "mot": 2,
+    "hai": 2,
+    "ba": 2
 }
