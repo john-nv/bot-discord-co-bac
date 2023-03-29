@@ -46,6 +46,7 @@ client.on("messageCreate", async (msg) => {
         }else{  
           msg.channel.send({ content: 'Bạn không có quyền sử dụng lệnh này !' })
         }
+        break;
       case 'bc':
         if (msg.member.roles.cache.some(role => role.name === HostBauCua) || msg.member.roles.cache.some(role => role.name === BipTaiXiu)) {
           dataBC = await baucua(client, msg, args, dataBC)
