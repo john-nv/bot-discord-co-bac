@@ -4,8 +4,8 @@ const client = new Client({
 });
 const fs = require('fs');
 
-const { token, prefix } = require("./config.json");
-const { taiXiu, bipTX } = require('./gameFunc');
+const { token, prefix, HostTaiXiu, BipTaiXiu, roleRandom1, roleRandom2 } = require("./config.json");
+const { taiXiu, bipTX , random, math } = require('./gameFunc');
 
 let dataTX = fs.readFileSync('./checkTX.json', 'utf-8');
 dataTX = JSON.parse(dataTX);
@@ -15,13 +15,15 @@ client.on('ready', () => {
   client.user.setPresence({
     activities: [
       {
-        name: 'Hế lô',
+        name: client.guilds.cache.get('832579380634451969').name, // 'Phục vụ cho ' + client.guilds.cache.get('832579380634451969').memberCount + ' thành viên trong ' + 
         type: 'PLAYING'
       }
     ],
     status: 'idle'
   });
+  // client.user.setAboutMe('Xin chào!');
 });
+
 
 client.on("messageCreate", async (msg) => {
   if (msg.author.bot || msg.channel.type === 'DM' || !msg.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
@@ -29,19 +31,35 @@ client.on("messageCreate", async (msg) => {
   const args = msg.content.slice(prefix.length).trim().split(/ +/g);
   const cmdName = args.shift().toLowerCase();
 
-  switch (cmdName) {
-    case 'tx':
-      dataTX = await taiXiu(client, msg, args, dataTX);
-      break;
-    case 'taixiu':
-      dataTX = await taiXiu(client, msg, args, dataTX);
-      break;
-    case 'biptx':
-      dataTX = await bipTX(client, msg, args)
-      break;
-    // case 'a':
-      // do something
-      // break;
+  try {
+    switch (cmdName) {
+      case 'tx':
+        if (msg.member.roles.cache.some(role => role.name === HostTaiXiu) || msg.member.roles.cache.some(role => role.name === BipTaiXiu)) {
+          dataTX = await taiXiu(client, msg, args, dataTX)
+        }else{
+          msg.channel.send({ content: 'Bạn không có quyền sử dụng lệnh tài xỉu này !' });
+        }
+        break;
+        case 'btx':
+          if (msg.member.roles.cache.some(role => role.name === BipTaiXiu)) {
+            dataTX = await bipTX(client, msg, args)
+          }else{
+            msg.channel.send({ content: 'Bạn không có quyền sử dụng lệnh này !' })
+          }
+        break;
+        case 'rd':
+          if (msg.member.roles.cache.some(role => role.name === roleRandom1) || msg.member.roles.cache.some(role => role.name === roleRandom2)){
+            dataTX = await random(client, msg, args)
+          }else{
+            msg.channel.send({ content: 'Bạn không có quyền sử dụng lệnh Random !' })
+          }
+        break;
+        case 'm':
+          dataTX = await math(client, msg, args)
+        break;
+    }
+  } catch (error) {
+    message.channel.send({ content: 'Đang đi uống nước đợi 1 chúc' });
   }
 });
 

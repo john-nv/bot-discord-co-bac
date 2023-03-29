@@ -1,9 +1,10 @@
 {
-    "token": "MTA4OTkxMDU5NDkwNTMyMTY0Mg.GVwQk9.cQ1nVBToPracZ90pCeAedHDHaEmjnZXEY7MRAY",
+    "token": "",
     "prefix": "-",
-    "CHANNELID_CHECK_MANAGE": "",
     "idAdmin": "",
-    "idBaucua": "",
-    "imglogoBackround": "",
-    "imgLogo": ""
+    "HostTaiXiu": "HostTaiXiu",
+    "BipTaiXiu": "HGTT",
+    "roleRandom1": "random nè",
+    "roleRandom2": "random 299",
+    "idBaucua": ""
 }
