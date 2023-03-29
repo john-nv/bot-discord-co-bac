@@ -41,7 +41,7 @@ module.exports = {
 
       let sendMes = await message.channel.send(sx1 + ' ' + sx2 + ' ' + sx3)
       let resultSX = await message.channel.send(`${muiten} **__Kết quả__: ???**`)
-      console.log(dataTX)
+      
       // thay đổi dữ liệu
       if (dataTX.check !== false) {
         let text = Object.values(dataTX);
@@ -96,6 +96,7 @@ module.exports = {
       message.channel.send({
         content: 'Đường truyền không ổn định'
       });
+      return { check: false }
     }
   },
   async bipTX(bot, message, args, dataTX) {
@@ -231,6 +232,7 @@ module.exports = {
       message.channel.send({
         content: 'Đường truyền không ổn định'
       });
+      return { check: false }
     }
   },
   async bipbaucua(bot, message, args, dataTX) {

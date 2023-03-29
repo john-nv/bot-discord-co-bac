@@ -4,7 +4,7 @@ const client = new Client({
 });
 const fs = require('fs');
 
-const { token, prefix, HostTaiXiu, BipTaiXiu, roleRandom1, roleRandom2 } = require("./config.json");
+const { token, prefix, HostTaiXiu, BipTaiXiu, roleRandom1, roleRandom2, HostBauCua } = require("./config.json");
 const { taiXiu, bipTX , random, math, baucua, bipbaucua } = require('./gameFunc');
 
 let dataTX = fs.readFileSync('./checkTX.json', 'utf-8');
@@ -47,7 +47,7 @@ client.on("messageCreate", async (msg) => {
           msg.channel.send({ content: 'Bạn không có quyền sử dụng lệnh này !' })
         }
       case 'bc':
-        if (msg.member.roles.cache.some(role => role.name === HostTaiXiu) || msg.member.roles.cache.some(role => role.name === BipTaiXiu)) {
+        if (msg.member.roles.cache.some(role => role.name === HostBauCua) || msg.member.roles.cache.some(role => role.name === BipTaiXiu)) {
           dataBC = await baucua(client, msg, args, dataBC)
         }else{
           msg.channel.send({ content: 'Bạn không có quyền sử dụng lệnh bầu cua này !' });
