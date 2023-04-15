@@ -1,6 +1,7 @@
 # bot-discord
 
 - tai/xiu
+- bau cua
 - random
 - math
 
